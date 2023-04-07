@@ -54,3 +54,61 @@ void input() {
 		cin >> Jodi[i];
 	}
 }
+void merge(int Jodi[80], int low, int high) {
+
+	int mid = (low + high) / 2;
+	int i = low;
+	int jf = mid + 1;
+	int k = low;
+	int temp[100]{};
+
+	while ((i <= mid) && (jf <= high)) {
+		if (Jodi[i] <= Jodi[jf]) {
+		
+	temp[k++] = Jodi[i++];
+		}
+		else {
+			temp[k++] = Jodi[jf++];
+		}
+	}
+
+	while (i <= mid) {
+		temp[k++] = Jodi[i++];
+	}
+	while (jf <= high) {
+		temp[k++] = Jodi[jf++];
+	}
+	for (int i = low; i <= high; i++) {
+		Jodi[i] = temp[i];
+	}
+
+}
+void mergeSort(int Jodi[80], int low, int high) {
+	if (low >= high) {
+		return;
+	}
+	int mid = (low + high) / 2;
+	mergeSort(Jodi, low, mid);
+	mergeSort(Jodi, mid + 1, high);
+	merge(Jodi, low, high);
+}
+
+void display() {
+	cout << "\n------------------" << endl;
+	cout << "Sorted Array" << endl;
+	cout << "------------------" << endl;
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << Jodi[i] << " ";
+	}
+}
+
+
+int main() {
+	input();
+	display();
+	mergeSort(Jodi, 0, n - 1);
+	system("pause");
+	return 0;
+}
